@@ -1,11 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Jogos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            display: block;
+            background: #08081E;
+        }
+        .container{
+            margin: 40px auto auto auto ;
+            color: #fff;
+            backdrop-filter: blur(10px);
+        }
+        .container>h1{
+            mix-blend-mode: color-dodge;
+        }
+        .container section{
+            border-bottom: 1px solid grey;
+            
+        }
+        .title-1{
+            color: rgba(241, 241, 241, 0.945);
+            font-family: monospace;
+        }
+        .title-2{
+            color: rgba(226, 226, 226, 0.644);
+        }
+        .text {
+            color: #fff;
+        }
+
+        .link {
+            color: rgb(38, 0, 255);
+            padding: 5px 15px;
+            background: rgba(233, 233, 233, 0.603);
+            mix-blend-mode: color-dodge;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .link:hover{
+            color: blue;
+            text-decoration: underline;
+        }
+        .radial1{
+            width: 70%;
+            height: 100%;
+            background: conic-gradient(#141414 0%, #949494 25%, rgb(247, 246, 246) 100%);
+            background-position: 140px;
+            rotate: 90deg;
+            position: fixed;
+            top: 0;
+            left: -189px;
+            z-index: -1;
+            mix-blend-mode: color-dodge;
+        }
+        .radial2{
+            width: 70%;
+            height: 100%;
+            background: conic-gradient(#141414 0%, #949494 25%, rgb(247, 246, 246) 100%);
+            background-position: 140px;
+            rotate: 90deg;
+            transform: scaleY(-1);
+            position: fixed;
+            top: 0;
+            right: -188px;
+            z-index: -1;
+            mix-blend-mode: color-dodge;
+            overflow: hidden;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <main class="container flex flex-col justify-center items-center w-[100%]">
+        <h1 class="text-2xl title-1">Lista de Jogos</h1>
+        {% for jogo in jogos%}
+            <section class="flex ml-10 gap-10 p-10 w-4/5">
+                {% if jogo.image %}
+                    <div class=" w-[1000px]">
+                        <img src="{{jogo.image.url}}" alt="imagem do jogo {{jogo.title}}">
+                    </div>
+                {% endif %}
+                <div class="flex flex-col gap-2">
+                    <h1 class="title-2 text-xl">{{jogo.title}}</h1>
+                    <p >{{jogo.description}}</p>
+                    <div>
+                        <h2><a class="link" href="{% url 'jogo_detail' jogo.pk %}">Ver mais</a></h2>
+                    </div>
+                </div>
+            </section>
+        {%empty%}
+            <p class="text">Nenhum jogo cadastrado</p>
+        {% endfor %}
+    </main>
+    <div class="radial1"></div>
+    <div class="radial2"></div>
 </body>
+
 </html>

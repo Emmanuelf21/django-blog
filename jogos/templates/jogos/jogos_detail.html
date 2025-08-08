@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{jogo.title}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            display: block;
+            background: #08081E;
+            color: #fff;
+        }
+        main{
+            /* margin-top: 0; */
+            backdrop-filter: blur(10px);
+        }
+        .title{
+            color: #f5f3f370;
+            mix-blend-mode: color-dodge;
+        }
+        .radial1{
+            width: 70%;
+            height: 100%;
+            background: conic-gradient(#141414 0%, #949494 25%, rgb(247, 246, 246) 100%);
+            background-position: 140px;
+            rotate: 90deg;
+            position: fixed;
+            top: 0;
+            left: -189px;
+            z-index: -1;
+            mix-blend-mode: color-dodge;
+        }
+        .radial2{
+            width: 70%;
+            height: 100%;
+            background: conic-gradient(#141414 0%, #949494 25%, rgb(247, 246, 246) 100%);
+            background-position: 140px;
+            rotate: 90deg;
+            transform: scaleY(-1);
+            position: fixed;
+            top: 0;
+            right: -188px;
+            z-index: -1;
+            mix-blend-mode: color-dodge;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <main class="container py-10 m-auto flex flex-col items-center gap-10">
+        {% if jogo.image %}
+            <img  class="w-[500px] m-auto" src="{{ jogo.image.url }}" alt="{{ jogo.title }}" width="200">
+        {% endif %}
+        <div class="w-1/2 flex flex-col gap-2">
+            <h1 class="text-3xl title">{{ jogo.title }}</h1>
+            <p>{{ jogo.description }}</p>
+        </div>
+
+        
+
+        {% if jogo.trailer %}
+            <div style="margin-top: 15px;">
+                <iframe width="1080" height="480" 
+                        src="{{ jogo.trailer }}" 
+                        frameborder="0" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        {% endif %}
+    </main>
+    <div class="radial1"></div>
+    <div class="radial2"></div>
+</body>
+</html>
